@@ -1,18 +1,27 @@
-//req request peticion del usuario -> datos
-//res response resultado -> status (200,400,500), json
+import { validateIfIsEmpty } from "../../shared/utils/validate-attribute.js";
+import validateID from "../../shared/utils/validate-id.util.js";
+import * as productRepository from "../repositories/product.repository.js";
 
-import * as productService from "../services/productService.js";
-
-export async function crear(req, res) {
+export async function saveProduct(req, res) {
   try {
     const { name, price, status, stock } = req.body;
-    const productoCreado = await productService.crear(
+
+    validateIfIsEmpty(name)
+    validateIfIsEmpty(price)
+    validateIfIsEmpty(status)
+    validateIfIsEmpty(stock)
+
+    const productoCreado = await productRepository.crear(
       name,
       price,
       stock,
       status
     );
-    res.status(201).json(productoCreado);
+
+    res.status(201).json({
+      mensaje: "producto creado",
+      data: productoCreado
+    });
   } catch (error) {
     res.status(500).json({
       mensaje: "error en el servidor",
@@ -21,9 +30,10 @@ export async function crear(req, res) {
   }
 }
 
-export async function obtenerTodos(req, res) {
+export async function listProducts(req, res) {
   try {
-    const productos = await productService.obtenerTodos();
+    const productos = await productRepository.obtenerTodos();
+
     if (productos) {
       res.status(200).json({
         mensaje: "productos encontrados",
@@ -45,10 +55,12 @@ export async function obtenerTodos(req, res) {
   }
 }
 
-export async function obtenerUno(req, res) {
+export async function findById(req, res) {
   try {
-    const { id } = req.params;
-    const producto = await productService.obtenerUno(id);
+    const id = validateID(req)
+
+    const producto = await productRepository.obtenerUno(id);
+
     if (producto) {
       res.status(200).json({
         mensaje: "producto encontrado",
@@ -70,17 +82,25 @@ export async function obtenerUno(req, res) {
   }
 }
 
-export async function actualizar(req, res) {
+export async function update(req, res) {
   try {
-    const { id } = req.params;
+    const id = validateID(req)
+
     const { name, price, status, stock } = req.body;
-    const productoActualizado = await productService.actualizar(
+
+    validateIfIsEmpty(name)
+    validateIfIsEmpty(price)
+    validateIfIsEmpty(status)
+    validateIfIsEmpty(stock)
+
+    const productoActualizado = await productRepository.actualizar(
       id,
       name,
       price,
       stock,
       status
     );
+
     res.status(201).json(productoActualizado);
   } catch (error) {
     console.log(error);
@@ -91,10 +111,12 @@ export async function actualizar(req, res) {
   }
 }
 
-export async function eliminar(req, res) {
+export async function remove(req, res) {
   try {
-    const { id } = req.params;
-    const productoEliminado = await productService.eliminar(id);
+    const id = validateID(req)
+
+    const productoEliminado = await productRepository.eliminar(id);
+
     res.status(200).json(productoEliminado);
   } catch (error) {
     res.status(500).json({
@@ -104,10 +126,12 @@ export async function eliminar(req, res) {
   }
 }
 
-export async function habilitar(req, res) {
+export async function enable(req, res) {
   try {
-    const { id } = req.params;
-    const productoHabilitado = await productService.habilitar(id);
+    const id = validateID(req)
+
+    const productoHabilitado = await productRepository.habilitar(id);
+
     res.status(200).json(productoHabilitado);
   } catch (error) {
     console.log(error);

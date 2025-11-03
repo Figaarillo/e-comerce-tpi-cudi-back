@@ -1,6 +1,6 @@
-import CategoryModel from "../models/category.model"
+import CategoryModel from "../models/category.model.js"
 
-export const getAllCategoriesPaginatedRepo = async (offset, limit) => {
+export const getAllCategories = async (offset, limit) => {
   const categories = await CategoryModel.find({ status: true })
 
   if (categories.length === 0) {
@@ -10,7 +10,7 @@ export const getAllCategoriesPaginatedRepo = async (offset, limit) => {
   return categories
 }
 
-export const getCategoryByPropRepo = async (prop) => {
+export const getCategoryByProp = async (prop) => {
   const category = await CategoryModel.findOne({ ...prop, status: true })
 
   if (category == null) {
@@ -20,7 +20,7 @@ export const getCategoryByPropRepo = async (prop) => {
   return category
 }
 
-export const createCategoryRepo = async (category) => {
+export const createCategory = async (category) => {
   const newCategory = await CategoryModel.create(category)
   if (newCategory == null) {
 
@@ -30,25 +30,25 @@ export const createCategoryRepo = async (category) => {
   return newCategory
 }
 
-export const updateCategoryRepo = async (id, category) => {
-  const updatedCategory = await CategoryModel.findOneAndUpdate(
+export const updateCategory = async (id, category) => {
+  const categoryUpdated = await CategoryModel.findOneAndUpdate(
     { _id: id },
     { ...category },
     { new: true }
   )
 
-  if (updatedCategory == null) {
+  if (categoryUpdated == null) {
     throw new Error("Repository error: Cannot update category")
   }
 
-  return updateCategoryRepo
+  return categoryUpdated
 }
 
-export const deleteCategoryRepo = async (id) => {
+export const removeCateogory = async (id) => {
   await CategoryModel.findByIdAndUpdate(id, { status: false })
 }
 
-export const restoreCategoryRepo = async (id) => {
+export const enableCategory = async (id) => {
   await CategoryModel.findOneAndUpdate({ _id: id }, { status: true })
 }
 
