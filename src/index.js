@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import productRouter from "./router/productRouter.js";
+import categoryRouter from "./category/routes/category.route.js";
 
 dotenv.config();
 
@@ -11,10 +12,11 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use("/api/product",productRouter)
+app.use("/api/product", productRouter)
+app.use("/api/category", categoryRouter)
 
 
-app.get((req, res) => {
+app.get((_, res) => {
   res.status(404).json("404");
 })
 
@@ -23,7 +25,7 @@ mongoose.connect(process.env.URLDB).then(() => {
   app.listen(PORT, () => {
     console.log("servidor escuchando en puerto:", PORT);
   });
-}).catch((error)=>{
-    console.log("error:",error)
+}).catch((error) => {
+  console.log("error:", error)
 });
 

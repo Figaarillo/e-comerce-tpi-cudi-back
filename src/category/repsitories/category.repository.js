@@ -22,8 +22,8 @@ export const getCategoryByPropRepo = async (prop) => {
 
 export const createCategoryRepo = async (category) => {
   const newCategory = await CategoryModel.create(category)
-
   if (newCategory == null) {
+
     throw new Error("Repository error: Cannot create category")
   }
 
@@ -46,5 +46,9 @@ export const updateCategoryRepo = async (id, category) => {
 
 export const deleteCategoryRepo = async (id) => {
   await CategoryModel.findByIdAndUpdate(id, { status: false })
+}
+
+export const restoreCategoryRepo = async (id) => {
+  await CategoryModel.findOneAndUpdate({ _id: id }, { status: true })
 }
 

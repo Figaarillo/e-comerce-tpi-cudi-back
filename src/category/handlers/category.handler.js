@@ -1,9 +1,9 @@
 import { validateIfIsEmpty } from "../../shared/utils/validate-attribute"
-import { createCategoryRepo, deleteCategoryRepo, getAllCategories, getCategoryByPropRepo, updateCategoryRepo } from "../repsitories/category.repository"
+import { createCategoryRepo, deleteCategoryRepo, getAllCategories, getCategoryByPropRepo, restoreCategoryRepo, updateCategoryRepo } from "../repsitories/category.repository"
 
-export const listCategory = (_, res) => {
+export const listCategores = async (_, res) => {
   try {
-    const categories = getAllCategories()
+    const categories = await getAllCategories()
 
     if (categories.length === 0) {
       res.status(200).json({ message: "categorias no encontradas", data: categories })
@@ -15,11 +15,11 @@ export const listCategory = (_, res) => {
   }
 }
 
-export const findById = (req, res) => {
+export const findById = async (req, res) => {
   try {
     const { id } = req.params
 
-    const category = getCategoryByPropRepo({ id })
+    const category = await getCategoryByPropRepo({ id })
 
     res.status(200).json({
       message: "categoria encontrada",
@@ -30,7 +30,7 @@ export const findById = (req, res) => {
   }
 }
 
-export const saveCategory = (req, res) => {
+export const saveCategory = async (req, res) => {
   try {
     const { name, description, image } = req.body
 
@@ -38,7 +38,7 @@ export const saveCategory = (req, res) => {
     validateIfIsEmpty(description)
     validateIfIsEmpty(image)
 
-    const category = createCategoryRepo({ name, description, image })
+    const category = await createCategoryRepo({ name, description, image })
 
     res.status(200).json({
       message: "categoria creada",
@@ -49,7 +49,7 @@ export const saveCategory = (req, res) => {
   }
 }
 
-export const updateCategoryR = (req, res) => {
+export const updateCategory = async (req, res) => {
   try {
     const { id } = req.params
 
@@ -59,7 +59,7 @@ export const updateCategoryR = (req, res) => {
     validateIfIsEmpty(description)
     validateIfIsEmpty(image)
 
-    const category = updateCategoryRepo(id, { name, description, image })
+    const category = await updateCategoryRepo(id, { name, description, image })
 
     res.status(200).json({
       message: "categoria actualizada",
@@ -70,11 +70,11 @@ export const updateCategoryR = (req, res) => {
   }
 }
 
-export const deleteCategory = (req, res) => {
+export const removeCategory = async (req, res) => {
   try {
     const { id } = req.params
 
-    const category = deleteCategoryRepo(id)
+    const category = await deleteCategoryRepo(id)
 
     res.status(200).json({
       message: "categoria eliminada",
@@ -83,4 +83,19 @@ export const deleteCategory = (req, res) => {
   } catch (error) {
     console.error(error)
   }
+}
+
+export const enableCategoty = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    await restoreCategoryRepo(id)
+
+    res.status(200).json({
+      mssage: "categoria habilitada",
+    })
+  } catch (error) {
+    console.error(error)
+  }
+
 }
