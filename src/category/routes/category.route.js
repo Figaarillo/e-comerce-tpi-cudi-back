@@ -1,18 +1,18 @@
 import { Router } from "express";
-import { removeCategory, findById, listCategores, saveCategory, updateCategory } from "../handlers/category.handler.js";
+import { remove, findById, list, save, update, enable } from "../handlers/category.handler.js";
 
 const categoryRouter = Router()
 
-categoryRouter.get("/", listCategores)
+categoryRouter.get("/", list)
 
 categoryRouter.get("/:id", findById)
 
-categoryRouter.post("/", saveCategory)
+categoryRouter.post("/", save)
 
-categoryRouter.put("/:id", updateCategory)
+categoryRouter.put("/:id", update)
 
-categoryRouter.delete("/:id", removeCategory)
+categoryRouter.delete("/:id", remove)
 
-categoryRouter.patch("/enable/:id", enableCategoty)
+categoryRouter.patch("/enable/:id", enable)
 
 export default categoryRouter

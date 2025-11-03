@@ -1,8 +1,8 @@
-import express from "express";
 import dotenv from "dotenv";
+import express from "express";
 import mongoose from "mongoose";
-import productRouter from "./router/productRouter.js";
 import categoryRouter from "./category/routes/category.route.js";
+import productRouter from "./product/routers/product.router.js";
 
 dotenv.config();
 

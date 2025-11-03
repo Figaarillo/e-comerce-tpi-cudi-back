@@ -1,7 +1,8 @@
 import { validateIfIsEmpty } from "../../shared/utils/validate-attribute.js"
-import { createCategoryRepo, deleteCategoryRepo, getAllCategories, getCategoryByPropRepo, restoreCategoryRepo, updateCategoryRepo } from "../repsitories/category.repository.js"
+import validateID from "../../shared/utils/validate-id.util.js"
+import { createCategory, enableCategory, getAllCategories, getCategoryByProp, removeCateogory, updateCategory } from "../repsitories/category.repository.js"
 
-export const listCategores = async (_, res) => {
+export const list = async (_, res) => {
   try {
     const categories = await getAllCategories()
 
@@ -19,7 +20,7 @@ export const findById = async (req, res) => {
   try {
     const id = validateID(req)
 
-    const category = await getCategoryByPropRepo({ id })
+    const category = await getCategoryByProp({ id })
 
     res.status(200).json({
       message: "categoria encontrada",
@@ -30,7 +31,7 @@ export const findById = async (req, res) => {
   }
 }
 
-export const saveCategory = async (req, res) => {
+export const save = async (req, res) => {
   try {
     const { name, description, image } = req.body
 
@@ -38,7 +39,7 @@ export const saveCategory = async (req, res) => {
     validateIfIsEmpty(description)
     validateIfIsEmpty(image)
 
-    const category = await createCategoryRepo({ name, description, image })
+    const category = await createCategory({ name, description, image })
 
     res.status(200).json({
       message: "categoria creada",
@@ -49,7 +50,7 @@ export const saveCategory = async (req, res) => {
   }
 }
 
-export const updateCategory = async (req, res) => {
+export const update = async (req, res) => {
   try {
     const id = validateID(req)
 
@@ -59,7 +60,7 @@ export const updateCategory = async (req, res) => {
     validateIfIsEmpty(description)
     validateIfIsEmpty(image)
 
-    const category = await updateCategoryRepo(id, { name, description, image })
+    const category = await updateCategory(id, { name, description, image })
 
     res.status(200).json({
       message: "categoria actualizada",
@@ -70,11 +71,11 @@ export const updateCategory = async (req, res) => {
   }
 }
 
-export const removeCategory = async (req, res) => {
+export const remove = async (req, res) => {
   try {
     const id = validateID(req)
 
-    const category = await deleteCategoryRepo(id)
+    const category = await removeCateogory(id)
 
     res.status(200).json({
       message: "categoria eliminada",
@@ -85,11 +86,11 @@ export const removeCategory = async (req, res) => {
   }
 }
 
-export const enableCategoty = async (req, res) => {
+export const enable = async (req, res) => {
   try {
     const id = validateID(req)
 
-    await restoreCategoryRepo(id)
+    await enableCategory(id)
 
     res.status(200).json({
       mssage: "categoria habilitada",
@@ -97,5 +98,4 @@ export const enableCategoty = async (req, res) => {
   } catch (error) {
     console.error(error)
   }
-
 }

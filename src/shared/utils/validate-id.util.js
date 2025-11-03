@@ -7,3 +7,5 @@ const validateID = (req) => {
 
   return id
 }
+
+export default validateID
