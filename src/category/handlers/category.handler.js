@@ -1,5 +1,5 @@
-import { validateIfIsEmpty } from "../../shared/utils/validate-attribute"
-import { createCategoryRepo, deleteCategoryRepo, getAllCategories, getCategoryByPropRepo, restoreCategoryRepo, updateCategoryRepo } from "../repsitories/category.repository"
+import { validateIfIsEmpty } from "../../shared/utils/validate-attribute.js"
+import { createCategoryRepo, deleteCategoryRepo, getAllCategories, getCategoryByPropRepo, restoreCategoryRepo, updateCategoryRepo } from "../repsitories/category.repository.js"
 
 export const listCategores = async (_, res) => {
   try {
@@ -17,7 +17,7 @@ export const listCategores = async (_, res) => {
 
 export const findById = async (req, res) => {
   try {
-    const { id } = req.params
+    const id = validateID(req)
 
     const category = await getCategoryByPropRepo({ id })
 
@@ -51,7 +51,7 @@ export const saveCategory = async (req, res) => {
 
 export const updateCategory = async (req, res) => {
   try {
-    const { id } = req.params
+    const id = validateID(req)
 
     const { name, description, image } = req.body
 
@@ -72,7 +72,7 @@ export const updateCategory = async (req, res) => {
 
 export const removeCategory = async (req, res) => {
   try {
-    const { id } = req.params
+    const id = validateID(req)
 
     const category = await deleteCategoryRepo(id)
 
@@ -87,7 +87,7 @@ export const removeCategory = async (req, res) => {
 
 export const enableCategoty = async (req, res) => {
   try {
-    const { id } = req.params
+    const id = validateID(req)
 
     await restoreCategoryRepo(id)
 
