@@ -8,8 +8,8 @@ dotenv.config();
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
 
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use("/api/product", productRouter)
@@ -20,7 +20,9 @@ app.get((_, res) => {
   res.status(404).json("404");
 })
 
-mongoose.connect(process.env.URLDB).then(() => {
+console.log(process.env.MONGO_URI)
+
+mongoose.connect(process.env.MONGO_URI).then(() => {
   console.log("base de datos conectada:", process.env.URLDB);
   app.listen(PORT, () => {
     console.log("servidor escuchando en puerto:", PORT);

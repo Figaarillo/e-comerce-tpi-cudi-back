@@ -1,0 +1,26 @@
+# Node.js specific files and directories
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp
+.pnp.js
+
+# Development and build artifacts
+build
+dist
+out
+.next # For Next.js projects
+.nuxt # For Nuxt.js projects
+coverage
+
+# Version control
+.git
+.gitignore
+
+# Environment variables and sensitive files
+.vscode
+.idea
+*.log
+*.DS_Store
+Thumbs.db

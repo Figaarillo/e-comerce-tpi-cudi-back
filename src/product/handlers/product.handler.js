@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
 import { validateIfIsEmpty } from "../../shared/utils/validate-attribute.js";
 import validateID from "../../shared/utils/validate-id.util.js";
 import * as productRepository from "../repositories/product.repository.js";
