@@ -1,33 +1,32 @@
 import dotenv from "dotenv";
 import express from "express";
-import mongoose from "mongoose";
 import categoryRouter from "./category/routes/category.route.js";
 import productRouter from "./product/routers/product.router.js";
+import connectMongoDB from "./shared/config/mongodb.config.js";
 
 dotenv.config();
 
 const app = express();
 
+/* MIDDLEWARES */
+// TODO: añadir cors
+app.use(express.json());
+app.use(express.static('storage'));
+
 
 const PORT = process.env.PORT || 3000;
-app.use(express.json());
+const HOST = process.env.HOST || "localhost";
 
+// TODO: añadir morgan
+
+
+
+/* RUTAS */
 app.use("/api/product", productRouter)
 app.use("/api/category", categoryRouter)
-
-
 app.get((_, res) => {
   res.status(404).json("404");
 })
 
-console.log(process.env.MONGO_URI)
-
-mongoose.connect(process.env.MONGO_URI).then(() => {
-  console.log("base de datos conectada:", process.env.URLDB);
-  app.listen(PORT, () => {
-    console.log("servidor escuchando en puerto:", PORT);
-  });
-}).catch((error) => {
-  console.log("error:", error)
-});
-
+connectMongoDB()
+app.listen(PORT, () => console.log(`Server levantado 🤙 http://${HOST}:${PORT}`));
