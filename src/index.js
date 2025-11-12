@@ -17,7 +17,7 @@ app.use(express.static('storage'));
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
 
-// TODO: añadir morgan
+// TODO: añadir morgan / winston
 
 
 
