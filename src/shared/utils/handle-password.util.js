@@ -15,5 +15,10 @@ export const encryptPassword = async passwordPlain => {
  * @param {*} hashPassword 
  */
 export const comparePassword = async (passwordPlain, hashPassword) => {
-  return await bcrypt.compare(passwordPlain, hashPassword);
+  // return await bcrypt.compare(passwordPlain, hashPassword);
+  const check = await bcrypt.compare(passwordPlain, hashPassword);
+  if (!check) {
+    handleError("PASSWORD_INVALID", 401)
+    return
+  }
 };

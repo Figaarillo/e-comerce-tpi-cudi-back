@@ -1,10 +1,12 @@
+import ErrorHandler from "../../shared/errors/handle-error"
+import handleHttpError from "../../shared/errors/handle-http-error"
 import { encryptPassword } from "../../shared/utils/handle-password.util"
 import { findUserByProp, registerUser } from "../repsitories/user.repository"
 
 const registerController = async (req, res) => {
   try {
     if (findUserByProp({ email: req.body.email })) {
-      throw new Error("USER_ALREADY_EXISTS")
+      throw new ErrorHandler("USER_ALREADY_EXISTS", 400)
     }
 
     const hashedPassword = await encryptPassword(req.body.password)
@@ -15,11 +17,7 @@ const registerController = async (req, res) => {
 
     res.status(201).json(user)
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      message: "error en el servidor",
-      error: error,
-    })
+    handleHttpError(res, error)
   }
 }
 

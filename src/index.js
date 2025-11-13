@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
+import authRouter from "./auth/routes/auth.route.js";
 import categoryRouter from "./category/routes/category.route.js";
 import productRouter from "./product/routers/product.router.js";
 import connectMongoDB from "./shared/config/mongodb.config.js";
@@ -24,9 +25,8 @@ const HOST = process.env.HOST || "localhost";
 /* RUTAS */
 app.use("/api/product", productRouter)
 app.use("/api/category", categoryRouter)
-app.get((_, res) => {
-  res.status(404).json("404");
-})
+app.use("/api/auth", authRouter)
+app.get((_, res) => res.status(404).json("404"))
 
 connectMongoDB()
 app.listen(PORT, () => console.log(`Server levantado 🤙 http://${HOST}:${PORT}`));
