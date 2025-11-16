@@ -1,7 +1,7 @@
 import { generateAccessToken, generateRefreshToken } from "../../shared/utils/generate-token.util"
 import { comparePassword } from "../../shared/utils/handle-password.util"
 
-const loginController = async (req, res) => {
+const loginHandler = async (req, res) => {
   try {
     const user = findUserByProp({ email: req.body.email })
 
@@ -16,7 +16,7 @@ const loginController = async (req, res) => {
     const refreshToken = generateRefreshToken(payload)
 
     res.status(200).json({
-      message: "Login successful",
+      message: "Login exitoso",
       accessToken,
       refreshToken
     })
@@ -25,4 +25,4 @@ const loginController = async (req, res) => {
   }
 }
 
-export default loginController
+export default loginHandler
