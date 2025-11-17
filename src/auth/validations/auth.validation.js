@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import validationMiddleware from "../../shared/middlewares/validation.middleware";
+import validationMiddleware from "../../shared/middlewares/validation.middleware.js";
 
 export const registerUserValidation = [
   body("username").isString().withMessage("El username debe ser un string"),

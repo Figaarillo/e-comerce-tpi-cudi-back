@@ -1,6 +1,7 @@
 import express from "express"
 import * as productController from "../handlers/product.handler.js"
-import { productBodyValidation } from "../validations/product.validation.js"
+import { productBodyValidation, productParamValidation } from "../validations/product.validation.js"
+import validationMiddleware from "../../shared/middlewares/validation.middleware.js"
 
 const productRouter = express.Router()
 

@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs"
+import bcrypt from "bcrypt"
 
 /**
  * Encripta la contraseña

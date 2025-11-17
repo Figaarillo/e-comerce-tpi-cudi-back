@@ -1,7 +1,7 @@
-import ErrorHandler from "../../shared/errors/handle-error"
-import handleHttpError from "../../shared/errors/handle-http-error"
-import { encryptPassword } from "../../shared/utils/handle-password.util"
-import { findUserByProp, registerUser } from "../repsitories/user.repository"
+import ErrorHandler from "../../shared/errors/handle-error.js"
+import handleHttpError from "../../shared/errors/handle-http-error.js"
+import { encryptPassword } from "../../shared/utils/handle-password.util.js"
+import { findUserByProp, registerUser } from "../repsitories/user.repository.js"
 
 const registerHandler = async (req, res) => {
   try {
