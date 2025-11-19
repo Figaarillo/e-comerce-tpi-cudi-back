@@ -1,6 +1,7 @@
+import handleHttpError from "../../shared/errors/handle-http-error.js";
 import { getAllProducts } from "../repositories/product.repository.js";
 
-async function listProducts(req, res) {
+async function listProductsHandler(req, res) {
   try {
     const products = await getAllProducts();
 
@@ -18,11 +19,8 @@ async function listProducts(req, res) {
       });
     }
   } catch (error) {
-    res.status(500).json({
-      mensaje: "error en el servidor",
-      error: error,
-    });
+    handleHttpError(res, error)
   }
 }
 
-export default listProducts
+export default listProductsHandler

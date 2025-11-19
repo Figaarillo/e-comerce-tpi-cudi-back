@@ -1,7 +1,8 @@
+import handleHttpError from "../../shared/errors/handle-http-error.js";
 import { validateIfIsEmpty } from "../../shared/utils/validate-attribute.js";
 import { createNewProduct } from "../repositories/product.repository.js";
 
-async function saveProduct(req, res) {
+async function saveProductHandler(req, res) {
   try {
     const { name, price, status, stock } = req.body;
 
@@ -22,11 +23,8 @@ async function saveProduct(req, res) {
       data: productoCreado
     });
   } catch (error) {
-    res.status(500).json({
-      mensaje: "error en el servidor",
-      error: error,
-    });
+    handleHttpError(res, error)
   }
 }
 
-export default saveProduct
+export default saveProductHandler

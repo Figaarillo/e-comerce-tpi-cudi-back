@@ -1,6 +1,7 @@
+import handleHttpError from "../../shared/errors/handle-http-error.js";
 import { removeProduct } from "../repositories/product.repository.js";
 
-async function remove(req, res) {
+async function removeProductHandler(req, res) {
   try {
     const id = validateID(req)
 
@@ -8,11 +9,8 @@ async function remove(req, res) {
 
     res.status(200).json(productoEliminado);
   } catch (error) {
-    res.status(500).json({
-      mensaje: "error en el servidor",
-      error: error,
-    });
+    handleHttpError(res, error)
   }
 }
 
-export default remove
+export default removeProductHandler

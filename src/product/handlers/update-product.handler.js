@@ -1,6 +1,7 @@
+import handleHttpError from "../../shared/errors/handle-http-error.js";
 import { updateProduct } from "../repositories/product.repository.js";
 
-async function update(req, res) {
+async function updateHandler(req, res) {
   try {
     const id = validateID(req)
 
@@ -21,12 +22,8 @@ async function update(req, res) {
 
     res.status(201).json(updatedProduct);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      mensaje: "error en el servidor",
-      error: error,
-    });
+    handleHttpError(res, error)
   }
 }
 
-export default update
+export default updateHandler

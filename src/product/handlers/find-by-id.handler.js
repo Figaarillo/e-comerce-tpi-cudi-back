@@ -1,6 +1,7 @@
+import handleHttpError from "../../shared/errors/handle-http-error.js";
 import { getOneProduct } from "../repositories/product.repository.js";
 
-async function findById(req, res) {
+async function findByIdHandler(req, res) {
   try {
     const id = validateID(req)
 
@@ -20,11 +21,8 @@ async function findById(req, res) {
       });
     }
   } catch (error) {
-    res.status(500).json({
-      mensaje: "error en el servidor",
-      error: error,
-    });
+    handleHttpError(res, error)
   }
 }
 
-export default findById
+export default findByIdHandler
