@@ -1,7 +1,7 @@
 import express from "express"
 import { productBodyValidation, productParamValidation } from "../validations/product.validation.js"
 import listProductsHandler from "../handlers/list-products.handler.js"
-import findByIdHandler from "../handlers/find-by-id.handler.js"
+import findProductByIdHandler from "../handlers/find-by-id.handler.js"
 import saveProductHandler from "../handlers/save-product.handler.js"
 import updateHandler from "../handlers/update-product.handler.js"
 import removeProductHandler from "../handlers/remove-product.handler.js"
@@ -12,7 +12,7 @@ const productRouter = express.Router()
 
 productRouter.get("/", listProductsHandler)
 
-productRouter.get("/:id", productParamValidation, findByIdHandler)
+productRouter.get("/:id", productParamValidation, findProductByIdHandler)
 
 productRouter.post("/", productBodyValidation, saveProductHandler)
 

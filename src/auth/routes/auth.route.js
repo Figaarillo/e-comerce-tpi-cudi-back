@@ -7,5 +7,11 @@ const authRouter = Router()
 
 authRouter.post("/register", registerUserValidation, registerHandler)
 authRouter.post("/login", loginUserValidation, loginHandler)
+authRouter.get("/me", (req, res) => {
+  res.status(200).json({
+    message: "Informacion del usuario",
+    data: req.user
+  })
+})
 
 export default authRouter

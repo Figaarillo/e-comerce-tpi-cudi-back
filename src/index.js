@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.static('storage'));
 app.use(cors(corsOptions))
 
-const ENV = process.env.ENV;
+/* VARIABLES DE ENTORNO */
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
 

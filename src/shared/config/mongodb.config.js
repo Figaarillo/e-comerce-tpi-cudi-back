@@ -4,8 +4,8 @@ import mongoose from "mongoose";
 
 const connectMongoDB = () => {
   mongoose
-    .connect(process.env.URLDB)
-    .then(() => console.log("base de datos conectada 🤟🔥: ", process.env.URLDB))
+    .connect(process.env.MONGO_URI)
+    .then(() => console.log("base de datos conectada 🤟🔥: ", process.env.MONGO_URI))
     .catch((err) => console.error('❌ Error conectando a MongoDB:', err));
   ;
 }
