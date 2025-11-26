@@ -1,3 +1,6 @@
+import { validateIfIsEmpty } from "../../shared/utils/validate-attribute.js"
+import { createCategory } from "../repsitories/category.repository.js"
+
 const saveCategoryHandler = async (req, res) => {
   try {
     const { name, description, image } = req.body

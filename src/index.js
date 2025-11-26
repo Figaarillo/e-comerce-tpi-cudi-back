@@ -28,8 +28,8 @@ app.use((req, _, next) => {
 });
 
 /* RUTAS */
-app.use("/", (_, res) => res.status(200).json("Bienvenido a la API"));
-app.use("/health", (_, res) => res.status(200).json("Server is healthy"));
+// app.use("/", (_, res) => res.status(200).json("Bienvenido a la API"));
+// app.use("/health", (_, res) => res.status(200).json("Server is healthy"));
 app.use("/api/product", productRouter)
 app.use("/api/category", categoryRouter)
 app.use("/api/auth", authRouter)

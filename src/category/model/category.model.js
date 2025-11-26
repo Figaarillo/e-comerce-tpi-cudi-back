@@ -21,7 +21,7 @@ const categorySchema = new mongoose.Schema({
     maxlength: [500, 'La descripción no puede exceder 500 caracteres']
   },
   image: {
-    type: String,
+    type: String, // https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png
     default: ''
   },
   status: {
@@ -30,13 +30,12 @@ const categorySchema = new mongoose.Schema({
   }
 },
   {
-    timestamps: true
+    timestamps: true // representa las fechas de creación y actualización
   }
 );
 
 // Índices para mejorar las búsquedas
 categorySchema.index({ slug: 1 });
-categorySchema.index({ status: 1 });
 categorySchema.index({ name: 1 });
 
 // Middleware para generar slug automáticamente

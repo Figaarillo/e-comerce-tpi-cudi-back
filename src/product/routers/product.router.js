@@ -14,7 +14,7 @@ productRouter.get("/", listProductsHandler)
 
 productRouter.get("/:id", productParamValidation, findProductByIdHandler)
 
-productRouter.post("/", productBodyValidation, saveProductHandler)
+productRouter.post("/", saveProductHandler)
 
 productRouter.put("/:id", productParamValidation, productBodyValidation, updateHandler)
 
@@ -22,6 +22,14 @@ productRouter.delete("/:id", productParamValidation, removeProductHandler)
 
 productRouter.put("/enable/:id", enableProductHandler)
 
-productRouter.put("/category/:category", getProductsByCategoryHandler)
+/**
+ * Ejemploa:
+ * /api/products/category/herramientas
+ * /api/products/category/celulares
+ * /api/products/category/Ropa de hombre
+ * /api/products/category/ropa-de-hombre
+ * /api/products/category/ropa-de-mujer
+*/
+productRouter.get("/category/:category", getProductsByCategoryHandler)
 
 export default productRouter

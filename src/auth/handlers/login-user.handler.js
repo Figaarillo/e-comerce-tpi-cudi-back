@@ -1,3 +1,4 @@
+import handleHttpError from "../../shared/errors/handle-http-error.js"
 import { generateAccessToken, generateRefreshToken } from "../../shared/utils/generate-token.util.js"
 import { comparePassword } from "../../shared/utils/handle-password.util.js"
 

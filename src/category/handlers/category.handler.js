@@ -1,6 +1,6 @@
 import { validateIfIsEmpty } from "../../shared/utils/validate-attribute.js"
 import validateID from "../../shared/utils/validate-id.util.js"
-import { createCategory, enableCategory, getAllCategories, getCategoryByProp, removeCateogory, updateCategory } from "../repsitories/category.repository.js"
+import { enableCategory, removeCateogory, updateCategory } from "../repsitories/category.repository.js"
 
 export const update = async (req, res) => {
   try {

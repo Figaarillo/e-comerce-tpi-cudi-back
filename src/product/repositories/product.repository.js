@@ -1,6 +1,6 @@
 import ProductModel from "../models/product.model.js";
 
-export async function getAllProducts() {
+export async function getAllProductsAndPopulate() {
   const productos = await ProductModel
     .find({ status: true })
     .populate('category', 'name slug description image')
@@ -12,7 +12,7 @@ export async function getOneProduct(idProducto) {
   return product
 }
 
-export async function getOneProductPopulate(idProducto) {
+export async function getOneProductAndPopulate(idProducto) {
   const product = await ProductModel
     .findOne({ _id: idProducto, status: true })
     .populate('category', 'name slug description image')

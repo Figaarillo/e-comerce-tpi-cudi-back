@@ -1,3 +1,4 @@
+import { getCategoryByProp } from "../../category/repsitories/category.repository.js"
 import ErrorHandler from "../../shared/errors/handle-error.js"
 import handleHttpError from "../../shared/errors/handle-http-error.js"
 import { getProductsByProp, getProductsByPropAndPopulate } from "../repositories/product.repository.js"
@@ -6,7 +7,7 @@ const getProductsByCategoryHandler = async (req, res) => {
   try {
     const { category } = req.params
 
-    const categoryExists = await getProductsByProp({
+    const categoryExists = await getCategoryByProp({
       slug: category.toLowerCase()
     })
 
@@ -25,7 +26,6 @@ const getProductsByCategoryHandler = async (req, res) => {
   } catch (error) {
     handleHttpError(res, error)
   }
-
 }
 
 export default getProductsByCategoryHandler

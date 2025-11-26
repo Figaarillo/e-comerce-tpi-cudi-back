@@ -1,5 +1,5 @@
-import handleHttpError from "../../shared/errors/handle-http-error"
-import { getAllCategories } from "../repsitories/category.repository"
+import handleHttpError from "../../shared/errors/handle-http-error.js"
+import { getAllCategories } from "../repsitories/category.repository.js"
 
 const listCategoriesHandler = async (_, res) => {
   try {

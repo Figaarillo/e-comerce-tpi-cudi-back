@@ -1,3 +1,4 @@
+import ErrorHandler from "../../shared/errors/handle-error.js"
 import CategoryModel from "../models/category.model.js"
 
 export const getAllCategories = async (offset, limit) => {
@@ -11,13 +12,18 @@ export const getAllCategories = async (offset, limit) => {
 }
 
 export const getCategoryByProp = async (prop) => {
-  const category = await CategoryModel.findOne({ ...prop, status: true })
+  try {
+    const category = await CategoryModel.findOne({ ...prop, status: true })
 
-  if (category == null) {
-    throw new Error("Category not found")
+    if (category == null) {
+      throw new ErrorHandler("CATEGORY_NOT_EXISTS", 404)
+    }
+
+    return category
+  } catch (error) {
+    console.error(error)
+    throw error
   }
-
-  return category
 }
 
 export const createCategory = async (category) => {

@@ -1,11 +1,11 @@
 import handleHttpError from "../../shared/errors/handle-http-error.js";
-import { getOneProduct, getOneProductPopulate } from "../repositories/product.repository.js";
+import { getOneProductAndPopulate } from "../repositories/product.repository.js";
 
 async function findProductByIdHandler(req, res) {
   try {
     const id = validateID(req)
 
-    const product = await getOneProductPopulate(id);
+    const product = await getOneProductAndPopulate(id);
 
     if (product) {
       res.status(200).json({

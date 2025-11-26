@@ -1,13 +1,19 @@
 import { Router } from "express";
-import { remove, findById, list, save, update, enable } from "../handlers/category.handler.js";
+import listCategoriesHandler from "../handlers/list-categories.handler.js";
+import findCategoryByIdHandler from "../handlers/find-by-id.hanlder.js";
+import saveCategoryHandler from "../handlers/save-category.handler.js";
+import { enable, remove, update } from "../handlers/category.handler.js";
+import findCategoryBySlugHandler from "../handlers/find-by-slug.hanlder.js";
 
 const categoryRouter = Router()
 
-categoryRouter.get("/", list)
+categoryRouter.get("/", listCategoriesHandler)
 
-categoryRouter.get("/:id", findById)
+categoryRouter.get("/:id", findCategoryByIdHandler)
 
-categoryRouter.post("/", save)
+categoryRouter.get("/slug/:slug", findCategoryBySlugHandler)
+
+categoryRouter.post("/", saveCategoryHandler)
 
 categoryRouter.put("/:id", update)
 

@@ -12,12 +12,9 @@ async function saveProductHandler(req, res) {
     validateIfIsEmpty(price)
     validateIfIsEmpty(description)
     validateIfIsEmpty(category)
-    validateIfIsEmpty(categorySlug)
     validateIfIsEmpty(image)
-    validateIfIsEmpty(status)
-    validateIfIsEmpty(rating)
 
-    const categoryExists = await getCategoryByProp({ name: category })
+    const categoryExists = await getCategoryByProp({ _id: category })
     if (!categoryExists) {
       throw new ErrorHandler("CATEGORY_NOT_EXISTS", 404)
     }
@@ -38,6 +35,7 @@ async function saveProductHandler(req, res) {
       data: productoCreado
     });
   } catch (error) {
+    console.error(error)
     handleHttpError(res, error)
   }
 }

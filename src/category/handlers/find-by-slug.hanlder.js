@@ -1,4 +1,5 @@
-import ErrorHandler from "../../shared/errors/handle-error";
+import ErrorHandler from "../../shared/errors/handle-error.js";
+import { getCategoryByProp } from "../repsitories/category.repository.js";
 
 const findCategoryBySlugHandler = async (req, res) => {
   try {

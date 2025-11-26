@@ -30,9 +30,9 @@ export const productBodyValidation = [
     .isURL()
     .withMessage('La imagen debe ser una URL válida'),
 
-  body("stock")
-    .isNumeric()
-    .withMessage("El stock debe ser un número"),
+  // body("stock")
+  //   .isNumeric()
+  //   .withMessage("El stock debe ser un número"),
 
   body('active')
     .optional()
